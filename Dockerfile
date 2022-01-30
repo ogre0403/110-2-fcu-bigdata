@@ -1,18 +1,16 @@
 FROM openjdk:8u312-slim
 
+ENV HADOOP_VERSION=hadoop-2.6.0
 
 RUN apt update && \
     apt install -y openssh-client openssh-server vim 
-
+COPY ssh-key /root/.ssh
 RUN mkdir /run/sshd
 
-COPY hadoop-2.6.0-cdh5.5.1.tar.gz /opt
+COPY ${HADOOP_VERSION}.tar.gz /opt
 
-
-COPY ssh-key /root/.ssh
-
-RUN tar zxvf /opt/hadoop-2.6.0-cdh5.5.1.tar.gz -C /root && \
-    mv /root/hadoop-2.6.0-cdh5.5.1 /root/hadoop
+RUN tar zxvf /opt/${HADOOP_VERSION}.tar.gz -C /root && \
+    mv /root/${HADOOP_VERSION} /root/hadoop
 
 COPY hadoop/*.xml /root/hadoop/etc/hadoop
 
