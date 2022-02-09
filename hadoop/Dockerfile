@@ -6,7 +6,7 @@ FROM openjdk:8u312-slim
 RUN sed -i 's/deb.debian.org/free.nchc.org.tw/g' /etc/apt/sources.list && \
     apt update && \
     apt install -y openssh-client openssh-server vim 
-COPY ssh-key /root/.ssh
+COPY --chmod=600 ssh-key /root/.ssh
 RUN mkdir /run/sshd
 
 # install web terminal, https://github.com/Senzing/docker-xterm.git
