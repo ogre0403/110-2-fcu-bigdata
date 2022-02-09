@@ -5,7 +5,7 @@
 
 sleep 10s
 
-DIR="/tmp/hadoop_dir/dfs/name"
+DIR="/tmp/work/hadoop_dir/dfs/name"
 
 
 

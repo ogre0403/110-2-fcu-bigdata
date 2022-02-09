@@ -23,7 +23,7 @@
   </property>  
   <property>
     <name>hadoop.tmp.dir</name>
-    <value>/tmp/hadoop_dir</value>
+    <value>/tmp/work/hadoop_dir</value>
   </property>
 
 </configuration>

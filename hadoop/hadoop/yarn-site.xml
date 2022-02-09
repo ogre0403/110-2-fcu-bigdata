@@ -37,11 +37,11 @@
   </property>
 <property>
     <name>yarn.nodemanager.local-dirs</name>
-    <value>/tmp/hadoop_dir/nm-local-dir</value>
+    <value>/tmp/work/hadoop_dir/nm-local-dir</value>
   </property>
 <property>
     <name>yarn.nodemanager.log-dirs</name>
-    <value>/tmp/hadoop_dir/userlogs</value>
+    <value>/tmp/work/hadoop_dir/userlogs</value>
   </property>
 
 </configuration>
