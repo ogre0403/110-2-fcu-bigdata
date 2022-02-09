@@ -28,7 +28,7 @@ RUN tar zxvf /opt/${SPARK_VERSION}.tgz -C /opt && \
 RUN echo 'export SPARK_HOME=/opt/spark'             >> /root/.bashrc && \
     echo 'export PATH=$SPARK_HOME/bin:$PATH'        >> /root/.bashrc && \
     echo 'export PYSPARK_DRIVER_PYTHON=jupyter'     >> /root/.bashrc && \
-    echo "export PYSPARK_DRIVER_PYTHON_OPTS='notebook --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='' --notebook-dir=/workspace/spark-workshop '" >> /root/.bashrc
+    echo "export PYSPARK_DRIVER_PYTHON_OPTS='notebook --allow-root --ip=0.0.0.0 --no-browser --NotebookApp.token='' --notebook-dir=/tmp/work '" >> /root/.bashrc
 
 
 WORKDIR /root
