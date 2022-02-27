@@ -1,6 +1,6 @@
 REPO=ogre0403
 IMAGE=train-fcu-bigdata
-TAG = $(shell date '+%Y%m%d')
+TAG = $(shell date '+%Y%m%d%H%M')
 
 
 
