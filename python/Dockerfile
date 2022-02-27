@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.10.2-bullseye
 
 COPY requirements.txt /root
 
