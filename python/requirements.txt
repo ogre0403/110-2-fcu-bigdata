@@ -1,0 +1,7 @@
+pandas==1.4.1
+notebook==6.4.8
+requests==2.27.1
+matplotlib==3.5.1
+lxml==4.8.0
+
+
