@@ -26,4 +26,7 @@ build-tf:
 	docker build -t ${REPO}/$(IMAGE):tensorflow-$(TAG) -f tensorflow/Dockerfile ./tensorflow
 
 build-tfi-gpu:
-	docker build -t ${REPO}/$(IMAGE):tensorflow-$(TAG) -f tensorflow/Dockerfile.gpu ./tensorflow
+	docker build -t ${REPO}/$(IMAGE):tensorflow-gpu-$(TAG) -f tensorflow/Dockerfile.gpu ./tensorflow
+
+build-digits:
+	docker build -t ${REPO}/$(IMAGE):digits-$(TAG) -f digits/Dockerfile ./digits
