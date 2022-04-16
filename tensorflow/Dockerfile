@@ -3,18 +3,19 @@ FROM tensorflow/tensorflow:1.9.0
 
 RUN pip install keras==2.2.2 
 
-#RUN pip install jupyterthemes
-#RUN jt -t oceans16
+# RUN mkdir -p /workspace/course/
+# mkdir -p /workspace/course/keras \
+# mkdir -p /workspace/course/tensorflow
 
+COPY util /workspace/course/util
+COPY keras /workspace/course/keras
+COPY tensorflow /workspace/course/tensorflow
 
-RUN rm /notebooks/*
+COPY exercise/input /workspace/course/exercise
+COPY exercise/Keras-fashion-MNIST-CNN.ipynb /workspace/course/exercise
 
-ADD . /notebooks
-
-EXPOSE 6006
-# IPython
 EXPOSE 8888
 
-WORKDIR "/notebooks"
+WORKDIR "/workspace"
 
-CMD ["/run_jupyter.sh", "--allow-root", "--NotebookApp.token=''"]
+CMD ["jupyter","notebook", "--allow-root", "--ip=*","--NotebookApp.token=''","--notebook-dir=/workspace"]

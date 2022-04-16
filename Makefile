@@ -1,6 +1,6 @@
 REPO=ogre0403
 IMAGE=train-fcu-bigdata
-TAG = $(shell date '+%Y%m%d%H%M')
+TAG = $(shell date '+%Y%m%d')
 
 
 
@@ -25,7 +25,7 @@ build-python:
 build-tf:
 	docker build -t ${REPO}/$(IMAGE):tensorflow-$(TAG) -f tensorflow/Dockerfile ./tensorflow
 
-build-tfi-gpu:
+build-tf-gpu:
 	docker build -t ${REPO}/$(IMAGE):tensorflow-gpu-$(TAG) -f tensorflow/Dockerfile.gpu ./tensorflow
 
 build-digits:
