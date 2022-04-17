@@ -1,0 +1,140 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import tensorflow as tf\n",
+    "import numpy as np\n",
+    "import datetime\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "A = np.random.rand(5000, 5000).astype('float32')\n",
+    "B = np.random.rand(5000, 5000).astype('float32')\n",
+    "\n",
+    "# Creates a graph to store results\n",
+    "c1 = []\n",
+    "c2 = []\n",
+    "\n",
+    "# Define matrix power\n",
+    "def matpow(M, n):\n",
+    "    if n < 1: #Abstract cases where n < 1\n",
+    "        return M\n",
+    "    else:\n",
+    "        return tf.matmul(M, matpow(M, n-1))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Single GPU computation time: 0:00:04.551974\n"
+     ]
+    }
+   ],
+   "source": [
+    "with tf.device('/gpu:0'):\n",
+    "    a = tf.Variable(A)\n",
+    "    b = tf.Variable(B)\n",
+    "    #compute A^n and B^n and store results in c1\n",
+    "    c1.append(matpow(a,5))\n",
+    "    c1.append(matpow(b,5))\n",
+    "\n",
+    "\n",
+    "with tf.device('/gpu:0'):\n",
+    "    sum = tf.add_n(c1) #Addition of all elements in c1, i.e. A^n + B^n\n",
+    "    \n",
+    "t1_1 = datetime.datetime.now()\n",
+    "with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:\n",
+    "    init = tf.global_variables_initializer()\n",
+    "    sess.run(init)\n",
+    "    sess.run(sum)\n",
+    "t2_1 = datetime.datetime.now()\n",
+    "print \"Single GPU computation time: \" + str(t2_1-t1_1)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Single GPU computation time: 0:00:05.619643\n"
+     ]
+    }
+   ],
+   "source": [
+    "with tf.device('/gpu:0'):\n",
+    "    a = tf.Variable(A)\n",
+    "    c2.append(matpow(a,5))\n",
+    "\n",
+    "with tf.device('/gpu:1'):\n",
+    "    b = tf.Variable(B)\n",
+    "    c2.append(matpow(b,5))\n",
+    "\n",
+    "\n",
+    "with tf.device('/gpu:1'):\n",
+    "    sum = tf.add_n(c2) #Addition of all elements in c1, i.e. A^n + B^n\n",
+    "    \n",
+    "t1_2 = datetime.datetime.now()\n",
+    "with tf.Session(config=tf.ConfigProto(log_device_placement=True)) as sess:\n",
+    "    init = tf.global_variables_initializer()\n",
+    "    sess.run(init)\n",
+    "    sess.run(sum)\n",
+    "t2_2 = datetime.datetime.now()\n",
+    "print \"Single GPU computation time: \" + str(t2_2-t1_2)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 2",
+   "language": "python",
+   "name": "python2"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 2
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython2",
+   "version": "2.7.12"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
