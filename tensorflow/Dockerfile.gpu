@@ -13,8 +13,12 @@ COPY tensorflow /workspace/course/tensorflow
 COPY exercise/input /workspace/course/exercise
 COPY exercise/Keras-fashion-MNIST-CNN.ipynb /workspace/course/exercise
 
+RUN mkdir -p /workspace/logs
+
+COPY --chmod=755 bootstrap.sh /
+
 EXPOSE 8888
 
 WORKDIR "/workspace"
 
-CMD ["jupyter","notebook", "--allow-root", "--ip=*","--NotebookApp.token=''","--notebook-dir=/workspace"]
+CMD ["/bootstrap.sh"]
