@@ -13,6 +13,8 @@ COPY tensorflow /workspace/course/tensorflow
 COPY exercise/input /workspace/course/exercise/input
 COPY exercise/Keras-fashion-MNIST-CNN.ipynb /workspace/course/exercise
 COPY exercise/Keras-fashion-MNIST-MLP.ipynb /workspace/course/exercise
+COPY exercise/TF-fashion-MNIST-CNN.ipynb /workspace/course/exercise
+COPY exercise/TF-fashion-MNIST-MLP.ipynb /workspace/course/exercise
 
 RUN mkdir -p /workspace/logs
 
